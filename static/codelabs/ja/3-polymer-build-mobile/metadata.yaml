@@ -26,13 +26,13 @@ steps:
     blurb: "Chrome Dev Editor を使って新しい Polymer アプリケーションの土台を作成します。"
     title: "準備作業"
   -
-    blurb: "Bower を使って core-* 要素をインストールします。"
-    title: "コア要素をインストールする"
+    blurb: "Bower を使って iron-* 要素をインストールします。"
+    title: "Iron 要素をインストールする"
   -
-    blurb: "core-* 要素を使ってアプリにレイアウトを追加します。"
+    blurb: "iron-* 要素を使ってアプリにレイアウトを追加します。"
     title: "レスポンシブ レイアウトを作成する"
   -
-    blurb: "core-drawer-panel のレスポンシブ機能を使用します。"
+    blurb: "paper-drawer-panel のレスポンシブ機能を使用します。"
     title: "ドロワーを開く"
   -
     blurb: "ペーパー要素を使ってアプリの中核的要素を作成します。"

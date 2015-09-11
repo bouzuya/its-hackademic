@@ -299,7 +299,7 @@ paper-tabs {
 <aside class="callout">
   <b>注:</b>
 
-  <p> Polymer 1.0 では、カスタム要素の特定のスタイルを上書きする場合には、custom-style というカスタム要素で指定する必要があります（`is` 属性で適用するカスタム要素を指定できます）。特定のスタイルについては、各要素のドキュメントを参照してください。ここでは、 <a href="https://elements.polymer-project.org/elements/paper-toolbar#styling" target="blank">`--paper-toolbar-background`</a> を指定しています。</p>
+  <p> Polymer 1.0 では、カスタム要素の特定のスタイルを上書きする場合には、custom-style というカスタム要素で指定する必要があります（`is` 属性で適用するカスタム要素を指定できます）。特定のスタイルについては、各要素のドキュメントを参照してください。ここでは、 <a href="https://elements.polymer-project.org/elements/paper-toolbar#styling" target="_blank">`--paper-toolbar-background`</a> を指定しています。</p>
   
 
 </aside>

@@ -5,19 +5,19 @@ Polymer の `<paper-*>` セットは、要素におもしろい効果を与え�
 ### カードに影を追加する
 
 
-&rarr; `paper-shadow` 依存関係をインストールします。
+&rarr; `paper-material` 依存関係をインストールします。
 
     ...
-    <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+    <link rel="import" href="bower_components/paper-material/paper-material.html">
     ...
 
-&rarr; カードの div を囲むように `<paper-shadow>` 要素を追加します。`z` 属性を `2` に設定します。これで、影の *depth*（奥行）が決まります。
+&rarr; カードの div を囲むように `<paper-material>` 要素を追加します。`elevation` 属性を `2` に設定します。これで、影の *depth*（奥行）が決まります。また、ここでは `class` 属性の `flex` を `paper-material` に移動していることに注意してください。
     
-    <paper-shadow z="2">
-      <div flex class="card">
-        <p>{{body}}</p>
+    <paper-material elevation="2">
+      <div class="flex card">
+        <p>{{item.body}}</p>
       </div>
-    </paper-shadow>
+    </paper-material>
 
 <figure>
   <img src="img/s8-shadow.png">
@@ -38,15 +38,15 @@ Polymer の `<paper-*>` セットは、要素におもしろい効果を与え�
 &rarr; `<paper-ripple>` を `.card` div の一番下に追加します。
 `recenteringTouch` クラスを追加して、ユーザーのアクションに反応するようにします。
 
-    <div flex class="card">
+    <div class="flex card">
       ...
-      <paper-ripple class="recenteringTouch" fit></paper-ripple>
+      <paper-ripple class="recenteringTouch fit"></paper-ripple>
     </div>
 
 <aside class="callout">
   <b>注:</b>
 
-<p>`fit` 属性は、Polymer の [レイアウト属性](https://www.polymer-project.org/docs/polymer/layout-attrs.html#general-purpose-attributes)の 1 つです。`position: absolute` を設定し、`top:0;right:0;bottom:0;left:0;` を設定します。</p>
+<p>`fit` は、Polymer の [Flexbox layout](https://elements.polymer-project.org/guides/flex-layout)の 1 つです。`position: absolute` を設定し、`top:0;right:0;bottom:0;left:0;` を設定します。</p>
 </aside>
 
 &rarr; `index.html` を開き、<img src="img/runbutton.png" class="icon"> ボタンでアプリのプレビューを表示します。
@@ -54,16 +54,16 @@ Polymer の `<paper-*>` セットは、要素におもしろい効果を与え�
 
 ### ウォーターフォール モードを使用する
 
-要素によっては、その属性に応じて異なるスタイルが設定されるものがあります。例えば、`core-header-panel` では、`waterfall` モードはツールバーの挙動を変化させます。最初は平たんな状態ですが、コンテンツがツールバーの下にスクロールされると影ができます。
-使用できるすべてのモードを確認したい場合は、こちらの[core-header-panel github ページ](http://polymer.github.io/core-header-panel/components/core-header-panel/demo.html)を参照してください。
+要素によっては、その属性に応じて異なるスタイルが設定されるものがあります。例えば、`paper-header-panel` では、`waterfall` モードはツールバーの挙動を変化させます。最初は平たんな状態ですが、コンテンツがツールバーの下にスクロールされると影ができます。
+使用できるすべてのモードを確認したい場合は、こちらの[paper-header-panel Demo](https://elements.polymer-project.org/elements/paper-header-panel?view=demo:demo/index.html)を参照してください。
 
 
-&rarr; `mode="waterfall"` を、ドロワーおよびメイン セクションの `<core-header-panel>` に追加します。
+&rarr; `mode="waterfall"` を、ドロワーおよびメイン セクションの `<paper-header-panel>` に追加します。
 
     ...
-    <core-header-panel drawer mode="waterfall">
+    <paper-header-panel drawer mode="waterfall">
     ...
-    <core-header-panel main mode="waterfall">
+    <paper-header-panel main mode="waterfall">
     ...
 
 &rarr; <img src="img/runbutton.png" class="icon"> ボタンでアプリのプレビューを表示します。
@@ -77,21 +77,28 @@ Polymer の `<paper-*>` セットは、要素におもしろい効果を与え�
 
 ### より多くのスペースを使用する（可能な場合）
 
-`core-drawer-panel` はレスポンシブな要素です。narrow（幅が狭い）モードのときはドロワーを閉じます（モバイルなど）。この要素の `narrow` プロパティを使えば、モードが narrow ではないときに、ツールバーをより美しく表示させることができます。
+`paper-drawer-panel` はレスポンシブな要素です。narrow（幅が狭い）モードのときはドロワーを閉じます（モバイルなど）。この要素の `narrow` プロパティを使えば、モードが narrow ではないときに、ツールバーをより美しく表示させることができます。
 
-&rarr; `core-drawer-panel` の `narrow` プロパティを `narrow` 変数として公開します。
+&rarr; `paper-drawer-panel` の `narrow` プロパティを `narrow` 変数として公開します。
 
-    <core-drawer-panel id="drawerPanel" narrow="{{narrow}}">
+    <paper-drawer-panel ... narrow="{{narrow}}">
 
 &rarr; ツールバーに、`narrow` 変数に依存する条件付きクラスを追加します。
 
-[tokenList](http://www.polymer-project.org/docs/polymer/expressions.html#tokenlist) フィルターを使えば、フィルターに渡されるオブジェクトに基づいて、クラス名を動的に設定/削除することができます。
+`class$=` でハンドルを定義し、クラス名を動的に設定/削除することができます。
 
-    <core-header-panel drawer mode="waterfall">
-      <core-toolbar class="{{ {tall : !narrow} | tokenList }}">...</core-toolbar>
+    <paper-header-panel drawer mode="waterfall">
+      <paper-toolbar class$="{{isNarrow(narrow)}}">...</paper-toolbar>
       ...
-    <core-header-panel main mode="waterfall">
-      <core-toolbar class="{{ {tall : !narrow} | tokenList }}">...</core-toolbar>
+    <paper-header-panel main mode="waterfall">
+      <paper-toolbar class$="{{isNarrow(narrow)}}">...</paper-toolbar>
+
+    Polymer({
+      ...
+      isNarrow: function(narrow){
+        return !narrow ? 'tall' : '';
+      }
+    });
 
 <figure>
   <img src="img/s8-tall.png" height="300px;">

@@ -19,31 +19,33 @@
 &rarr; `paper-fab` ボタンを `main` セクションのツールバーに追加します。ボタンの `on-click` イベントを `showNewNoteInput` コールバックにバインドします。
 
     ...
-    <core-header-panel main>
-      <core-toolbar>
+    <paper-header-panel main>
+      <paper-toolbar>
         ...
-        <paper-fab icon="icons:add" on-click="{{showNewNoteInput}}"></paper-fab>
-      </core-toolbar>
-    </core-header-panel>
+        <paper-fab icon="icons:add" on-click="showNewNoteInput"></paper-fab>
+      </paper-toolbar>
+    </paper-header-panel>
 
 &rarr; `paper-fab` 用のルールを `styles.css` に追加します。
 
     paper-fab {
       background-color: #e0a30b;
       position: absolute !important;
+      width: 50px;
+      height: 50px;
       bottom: -27px;
-      right: 1em;
+      right: 1.6em;
       z-index: 10;
     }
 
-&rarr; `.content` div を、`main` セクションの `<core-toolbar>` の後に追加します。
+&rarr; `.content` div を、`main` セクションの `<paper-toolbar>` の後に追加します。
 
-    <core-header-panel main>
-      <core-toolbar>
+    <paper-header-panel main>
+      <paper-toolbar>
         ...
-      </core-toolbar>
+      </paper-toolbar>
       <div class="content"></div>
-    </core-header-panel>
+    </paper-header-panel>
 
 &rarr; `paper-input` 依存関係をインストールし、`paper-input` 要素を `.content` div に追加します。input 要素の ID は **newNoteInput** とします。`label` 属性を使って、input のラベルを定義します。`floatingLabel` 属性を使い、アクティブ時にはラベルがフィールド上に美しく浮くようにします。
 
@@ -72,7 +74,7 @@
 
 <aside class="callout">
   <b>コンポーネントのライフサイクル コールバック</b>
-  <p>`Ready` は、あらかじめ定義されている [コンポーネントのライフサイクル コールバック](http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods)の一例です。要素のインスタンスが作成されるとコールされます。
+  <p>`Ready` は、あらかじめ定義されている [コンポーネントのライフサイクル コールバック](https://www.polymer-project.org/1.0/docs/devguide/registering-elements.html#lifecycle-callbacks)の一例です。要素のインスタンスが作成されるとコールされます。
 </p>
 </aside>
 
@@ -82,15 +84,22 @@
     <paper-input id="newNoteInput"
                  floatingLabel
                  label="Add a new note"
-                 on-change="{{add}}"
+                 on-change="add"
                  value="{{newNote}}"></paper-input>
     ...
 
-&rarr; `data` という名称の配列を要素のプロトタイプに追加し、すべてのメモを保持するようにします。メモは 1つ 1 つがオブジェクトで、`body` と `done` という 2 つのプロパティを持っています。
+&rarr; `data` という名称の配列を `properties` で追加し、すべてのメモを保持するようにします。メモは 1つ 1 つがオブジェクトで、`body` と `done` という 2 つのプロパティを持っています。
 
     <script>
       Polymer({
-        data: [],
+        ...
+        properties: {
+          data: {
+            type: Array,
+            value: [],
+            notify: true
+          }
+        },
         ...
       });
     </script>
@@ -100,11 +109,10 @@
 
     <script>
       Polymer({
-        data: [],
         ...
         add: function() {
           if (this.newNote) {
-            this.data.unshift({
+            this.unshift('data', {
               body: this.newNote,
               done: false
             });
@@ -114,6 +122,11 @@
         }
       });
     </script>
+
+<aside class="callout">
+  <b>データバインドされた配列の操作に注意</b>
+  <p>配列操作（push, pop, splice, shift, unshift）は、そのままでは変更を検知できないため、Polymer が提供する API を利用してください（`this.unshift('array-name', {...})` など）。詳しくは、<a href="https://www.polymer-project.org/1.0/docs/devguide/templates.html#dom-repeat" target="_blank">こちら</a>を参照してください。</p>
+</aside>
 
 &rarr; `index.html` を開き、<img src="img/runbutton.png" class="icon"> をクリックしてアプリのプレビューを表示します。`paper-fab` をクリックすると、`paper-input` が表示されるはずです。
 
@@ -141,11 +154,11 @@
 
     <div class="content">
       ...
-      <template repeat="{{data}}" >
+      <template is="dom-repeat" items="{{data}}" >
         <div center horizontal layout class="item">
-          <paper-checkbox checked="{{done}}"></paper-checkbox>
+          <paper-checkbox checked="{{item.done}}"></paper-checkbox>
           <div flex class="card">
-            <p>{{body}}</p>
+            <p>{{item.body}}</p>
           </div>
         </div>
       </template>

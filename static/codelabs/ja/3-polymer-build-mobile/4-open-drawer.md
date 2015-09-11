@@ -12,7 +12,7 @@
 &rarr; ID **drawerPanel** をドロワーに追加します。
 
     ...
-    <core-drawer-panel id="drawerPanel">
+    <paper-drawer-panel responsiveWidth="600px" id="drawerPanel">
     ...
 
 <aside class="callout">
@@ -24,7 +24,7 @@
 &rarr; `on-click` リスナーを `<paper-icon-button icon="menu">` ボタンに追加します。これをルート要素の `toggleDrawer` メソッドにバインドします（メソッドはこの後で定義します）。
 
     ...
-    <paper-icon-button icon="menu" on-click="{{toggleDrawer}}"></paper-icon-button>
+    <paper-icon-button icon="menu" on-click="toggleDrawer"></paper-icon-button>
     ...
 
 <aside class="callout">
@@ -35,7 +35,7 @@ Polymer は、コンポーネントにおいてイベントとメソッドの宣
 </aside>
 
 &rarr; `toggleDrawer` メソッドを `codelab-app` 要素のプロトタイプに追加します。
-Polymer の `this.$.myIdName` という簡略表記を使って `core-drawer-panel` 要素にアクセスします。その `togglePanel` メソッドを使い、ドロワーのオープンを委託します。`core-drawer-panel` の API について詳しくは、こちらの[ドキュメント](https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel)を参照してください。
+Polymer の `this.$.myIdName` という簡略表記を使って `paper-drawer-panel` 要素にアクセスします。その `togglePanel` メソッドを使い、ドロワーのオープンを委託します。`paper-drawer-panel` の API について詳しくは、こちらの[ドキュメント](https://www.polymer-project.org/docs/elements/iron-elements.html#paper-drawer-panel)を参照してください。
 
     <script>
       Polymer({
@@ -51,9 +51,11 @@ Polymer の `this.$.myIdName` という簡略表記を使って `core-drawer-pan
 &rarr; ページを再読み込みします。ドロワーはデフォルトで非表示になっているはずです。ツールバーのメニュー ボタンをクリックしてみてください。その都度、ドロワーが開いたり閉じたりするはずです。
 
 <aside class="callout">
-<b>v0.5.1 の新機能</b>
+<b>Polymer 1.0</b>
 <p>
-`core-drawer-toggle` 属性を `paper-icon-button` に追加するだけで、ドロワーを切り替えられるようになりました。`core-drawer-toggle` を `paper-icon-button` に追加して、`on-click` と `toggleDrawer` メソッドを削除してみてください。そして、以前と同じ動きになるか確かめてください。
+<span style="font-size:16px;color:red;background:#ffddaa">
+`paper-drawer-toggle` 属性を `paper-icon-button` に追加するだけで、ドロワーを切り替えられるようになりました。`paper-drawer-toggle` を `paper-icon-button` に追加して、`on-click` と `toggleDrawer` メソッドを削除してみてください。そして、以前と同じ動きになるか確かめてください。
+</span>
 </p>
 </aside>
 

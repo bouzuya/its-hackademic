@@ -1,6 +1,6 @@
 ﻿<toc-element></toc-element>
 
-Polymer/core-* 要素は、ユーティリティ要素（ビジュアルな要素とそれ以外の要素とがある）がセットになったものです。この中には、レイアウトやユーザー入力、選択に作用する要素、土台となるアプリに作用する要素が含まれています。
+Polymer/iron-* 要素は、ユーティリティ要素（ビジュアルな要素とそれ以外の要素とがある）がセットになったものです。この中には、レイアウトやユーザー入力、選択に作用する要素、土台となるアプリに作用する要素が含まれています。
 これらの要素を使うには、まず、Bower を使って要素をインストールする必要があります。
 
 <aside class="callout">
@@ -9,17 +9,19 @@ Polymer/core-* 要素は、ユーティリティ要素（ビジュアルな要�
 </p>
 </aside>
 
-### core-* 要素をインストールする
+### iron-* 要素をインストールする
 
-プロジェクトの `bower_components` ディレクトリを見てみると、たくさんの `paper-*` コンポーネントがすでにプリインストールされていることが分かります。この codelab では、`core-*` と `paper-*` の両方の要素を使ってアプリを作成していきます。
+プロジェクトの `bower_components` ディレクトリを見てみると、たくさんの `paper-*` コンポーネントがすでにプリインストールされていることが分かります。この codelab では、`iron-*` と `paper-*` の両方の要素を使ってアプリを作成していきます。
 
-通常は、`bower install Polymer/core-elements --save` をコマンドライン上で実行して全要素を一括インストールしますが、Chrome Dev Editor には Bower コマンドを実行するコマンドラインがありません。代わりに、手動で `bower.json` を編集して `core-elements` を追加したのち、Chrome Dev Editor の Bower Update 機能を使ってペーパー要素を `bower_components/` にダウンロードします。
+通常は、`bower install Polymer/iron-elements --save` をコマンドライン上で実行して全要素を一括インストールしますが、Chrome Dev Editor には Bower コマンドを実行するコマンドラインがありません。代わりに、手動で `bower.json` を編集して `iron-elements` を追加したのち、Chrome Dev Editor の Bower Update 機能を使ってペーパー要素を `bower_components/` にダウンロードします。
 
-&rarr; `bower.json` を編集し、`dependencies` に `core-elements` を追加します。
+<span style="font-size:18px;color:red;background:#ffddaa">※ 現在のテンプレートには、既に `iron-elements` と `paper-elements` が含まれているため、編集の必要はありません。また、プロジェクトを作成すると自動で <code>bower install<code> が実行されるため、タスクが失敗した場合にのみドロップダウンから ` Bower Update` を実行してください。</span>
+
+&rarr; `bower.json` を編集し、`dependencies` に `iron-elements` を追加します。
 
     "dependencies": {
       ...
-      "core-elements": "Polymer/core-elements"
+      "iron-elements": "Polymer/iron-elements"
     }
 
 <div class="stepbystep">
@@ -36,7 +38,9 @@ Polymer/core-* 要素は、ユーティリティ要素（ビジュアルな要�
 
 同様に、Bower を使って Roboto フォントをインストールします。
 
-&rarr; `bower.json` を編集し、`dependencies` に `font-roboto2` を追加します。
+<span style="font-size:18px;color:red;background:#ffddaa">※ Roboto フォントは、`paper-elements` との依存関係から既に含まれているため、新たに追加する必要はありません。 `bower_components/font-roboto/roboto.html` が存在することを確認してください。</span>
+
+&rarr; `bower.json` を編集し、`dependencies` に `font-roboto` を追加します。
 
     "dependencies": {
       ...
@@ -70,16 +74,17 @@ Polymer の世界では、すべてが要素となります。したがってア
     <link rel="import" href="bower_components/polymer/polymer.html">
     <link rel="import" href="bower_components/font-roboto/roboto.html">
 
-    <polymer-element name="codelab-app">
+    <dom-module id="codelab-app">
       <template>
         <link rel="stylesheet" href="styles.css">
         Hello Polymer!
       </template>
       <script>
         Polymer({
+          is: 'codelab-app'
         });
       </script>
-    </polymer-element>
+    </dom-module>
 
 Roboto2 フォントのインポートは必須ではありませんが、これがあれば、今回のアプリで Roboto フォントを使用することができます。
 
@@ -118,7 +123,7 @@ Roboto2 フォントのインポートは必須ではありませんが、これ
 
 &rarr; `<body>` の中身を削除して、代わりに `<codelab-app>` を宣言します。
 
-    <body unresolved>
+    <body>
       <codelab-app></codelab-app>
     </body>
 
@@ -131,7 +136,7 @@ Roboto2 フォントのインポートは必須ではありませんが、これ
 
 このステップで学んだ内容:
 
-- Bower を使って `core-*` 要素をインストールする
+- Bower を使って `iron-*` 要素をインストールする
 - ルート要素を作成し、それをページ上で宣言的に使用する
 - CSS を使ってホスト要素のスタイルを設定する
 
