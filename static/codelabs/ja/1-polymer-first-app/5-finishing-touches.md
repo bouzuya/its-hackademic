@@ -21,29 +21,29 @@
   </google-youtube>
 </div>
 
-&rarr; エディターで `post-card.html` を開き、<code><a href="//polymer-project.org/docs/elements/core-elements.html#core-icon-button">&lt;core-icon-button></a></code> 要素を追加します。
+&rarr; エディターで `post-card.html` を開き、<code><a href="https://elements.polymer-project.org/elements/paper-icon-button">&lt;paper-icon-button></a></code> 要素を追加します。
 
 ```side-by-side
-<div class="card-header" layout horizontal center>
+<div class="card-header">
   <content select="img"></content>
   <content select="h2"></content>
 </div>
 
 <!-- content タグの上に、以下のコードを追加 -->
-<core-icon-button
+<paper-icon-button
   icon="favorite"
-  on-tap="{{favoriteTapped}}">
-</core-icon-button>
+  on-tap="favoriteTapped">
+</paper-icon-button>
 <!-- End -->
 
 <content></content>
 ```
 
 <ul class="side-by-side">
-  <li>`post-card.html` ファイルの冒頭には、`core-icon-button.html` 定義用のHTML importが既にあるはずです。</li>
-  <li>その名が示すように、<code>&lt;core-icon-button&gt;</code> は埋め込まれたアイコン付きのボタンを作成します。Polymer にはスケーラブルなアイコン セットがいくつか含まれています。</li>
+  <li>`post-card.html` ファイルの冒頭には、`paper-icon-button.html` 定義用のHTML importが既にあるはずです。</li>
+  <li>その名が示すように、<code>&lt;paper-icon-button&gt;</code> は埋め込まれたアイコン付きのボタンを作成します。Polymer にはスケーラブルなアイコン セットがいくつか含まれています。</li>
   <li><code>icon="favorite"</code> 属性は、デフォルトのアイコンセットからハート型アイコンを選択します。</li>
-  <li><code>on-tap=</code><wbr><code>"{{favoriteTapped}}"</code> 属性では、ボタンがタップされたときに <code>post-card</code> 要素にコールするメソッドを指定します。
+  <li><code>on-tap=</code><wbr><code>"favoriteTapped"</code> 属性では、ボタンがタップされたときに <code>post-card</code> 要素にコールするメソッドを指定します。
 </li>
 </ul>
 
@@ -53,16 +53,18 @@
  
 
 ```side-by-side
-<!-- 以下のコードを追加 -->
 <script>
 Polymer({
-  publish: {
+  is: 'post-card',
+  properties: {
     favorite: {
+      type: Boolean,
       value: false,
-      reflect: true
+      reflectToAttribute: true,
+      notify: true
     }
   },
-  favoriteTapped: function(event, detail, sender) {
+  favoriteTapped: function(event) {
     this.favorite = !this.favorite;
     this.fire('favorite-tap');
   }
@@ -71,7 +73,7 @@ Polymer({
 ```
 
 <ul class="side-by-side">
-  <li><code>publish</code> オブジェクトは、前のステップで示した <code>attributes</code> 属性と同じく、公開プロパティを設定するもう一つの方法です。ここでは、<code>favorite</code> プロパティはデフォルトが <code>false</code> で、かつ <em>reflect</em>（反映）するになっています。つまりプロパティ値が変化するたびに、DOM 内で<code>favorite</code> 属性が更新されます。</li>
+  <li><code>properties</code> オブジェクトは、前のステップで示した公開プロパティを設定する方法です。ここでは、<code>favorite</code> プロパティはデフォルトが <code>false</code> で、かつ <em>reflectToAttribute</em>（反映）するになっています。つまりプロパティ値が変化するたびに、DOM 内で<code>favorite</code> 属性が更新されます。また、<em>notify</em>で双方向データバインディングが有効になっています。</li>
   <li><code>favoriteTapped</code> イベントは、<code>favorite</code> プロパティの状態（<code>this.favorite</code>）を切り替え、組み込まれている <code>fire</code> メソッドを使ってカスタム イベントを開始します。（Polymer が個々のカスタム要素のプロトタイプに追加するユーティリティ メソッドがいくつかありますが、<code>fire</code> は、そのうちの 1 つです。）</li>
 </ul>
 
@@ -85,13 +87,13 @@ Polymer({
 
 ```side-by-side
 <!-- 以下のコードを追加 -->
-core-icon-button {
+paper-icon-button {
   position: absolute;
   top: 3px;
   right: 3px;
   color: #636363;
 }
-:host([favorite]) core-icon-button {
+:host([favorite]) paper-icon-button {
   color: #da4336;
 }
 </style>
@@ -99,7 +101,7 @@ core-icon-button {
 
 <ul class="side-by-side">
   <li><code>color</code> プロパティは、アイコンの塗りつぶし色を設定します。</li>
-  <li><code>:host([favorite])</code> <code>core-icon-button</code> セレクターは、 <code>favorite</code> 属性がカスタム要素上で設定されたときの塗りつぶし色を設定します。</li>
+  <li><code>:host([favorite])</code> <code>paper-icon-button</code> セレクターは、 <code>favorite</code> 属性がカスタム要素上で設定されたときの塗りつぶし色を設定します。</li>
 </ul>
 
 <hr>
@@ -125,11 +127,11 @@ core-icon-button {
 
     var tabs = document.querySelector('paper-tabs');
 
-    /* 以下のコードを追加 */
+    /* 以下のコードで置き換える */
     var list = document.querySelector('post-list');
 
-    tabs.addEventListener('core-select', function() {
-      list.show = tabs.selected;
+    tabs.addEventListener('iron-select', function() {
+      list.show = tabs.selectedItem.getAttribute('name');
     });
 
 &rarr; `app.js` を保存します。
@@ -141,12 +143,12 @@ core-icon-button {
 &rarr; `<post-card>` 要素を作成するテンプレートを更新して、お気に入りを接続します。
 
 ```side-by-side
-<template repeat="{{post in posts}}">
+<template is="dom-repeat" items="{{posts}}" as="post">
   <!-- 以下のコードを追加 -->
   <post-card
     favorite="{{post.favorite}}"
-    on-favorite-tap="{{handleFavorite}}"
-    hidden?="{{show == 'favorites' && !post.favorite}}">
+    on-favorite-tap="handleFavorite"
+    hidden$="{{isHidden(show, post)}}">
   <!-- ここまで -->
     <img src="{{post.avatar}}" width="70" height="70">
     <h2>{{post.username}}</h2>
@@ -158,7 +160,7 @@ core-icon-button {
 <ul class="side-by-side">
   <li><code>favorite=<wbr>"{{post.favorite}}"</code> は、カードの <code>favorite</code> 値を、<code>&lt;post-service&gt;</code> が所有する配列の値に結びつけます。</li>
   <li><code>on-favorite-tap</code> 属性は、<code>&lt;post-card&gt;</code> が起動する <code>favorite-tap</code> イベント用のハンドラーを設定します。</li>
-  <li><code>hidden?=</code><wbr><code>"{{}}"</code> 式はブーリアン属性の特殊な構文で、バインディング式が真のとき、その属性を設定します。
+  <li><code>hidden$=</code><wbr><code>"{{}}"</code> 式はブーリアン属性の特殊な構文で、バインディング式が真のとき、その属性を設定します。
  </li>
 </ul>
 
@@ -177,23 +179,33 @@ core-icon-button {
   </google-youtube>
 </div>
 
-&rarr; `favorite-tap` イベント用のイベント ハンドラーを `post-list.html` に追加します。
+&rarr; `show` プロパティの属性への反映を有効にします。また、表示判定用の `isHidden` メソッドや `favorite-tap` イベント用のイベント ハンドラーを `post-list.html` に追加します。
 
 ```side-by-side
-<!-- 以下のコードを追加 -->
+<!-- 以下のコードに置き換えます -->
 <script>
-Polymer({
-  handleFavorite: function(event, detail, sender) {
-    var post = sender.templateInstance.model.post;
-    this.$.service.setFavorite(post.uid, post.favorite);
-  }
-});
+  Polymer({
+    is: 'post-list',
+    properties: {
+      show: {
+        type: String,
+        reflectToAttribute: true
+      }
+    },
+    isHidden: function(show, post) {
+      return show === 'favorites' && !post.favorite;
+    },
+    handleFavorite: function(event) {
+      var post = event.model.post;
+      this.$.service.setFavorite(post.uid, post.favorite);
+    }
+  });
 </script>
 ```
 
 <ul class="side-by-side">
   <li><code>sender<wbr>.templateInstance<wbr>.model</code> は、テンプレート インスタンスの構築に使われるモデル データへの参照です。ここでは、<code>&lt;post-card&gt;</code> の作成に使われる <code>post</code> オブジェクトが含まれているので、その ID と <code>favorite</code>  値を取得することができます。</li>
-  <li><code>this.$.service</code> は <code>&lt;post-service&gt;</code> 要素への参照を返します。カスタム要素の shadow DOM にある要素で、<code>id</code> 属性を持つものはすべて、<code>this.$</code> ディクショナリへ追加されます。このことを、<a href="//polymer-project.org/docs/polymer/polymer.html#automatic-node-finding">automatic node finding（自動ノード検索）</a>と呼びます。</li>
+  <li><code>this.$.service</code> は <code>&lt;post-service&gt;</code> 要素への参照を返します。カスタム要素の shadow DOM にある要素で、<code>id</code> 属性を持つものはすべて、<code>this.$</code> ディクショナリへ追加されます。このことを、<a href="https://www.polymer-project.org/1.0/docs/devguide/local-dom.html#node-finding">automatic node finding（自動ノード検索）</a>と呼びます。</li>
   <li>実際のソーシャル ネットワーキング サービスでは、<code>setFavorite</code> メソッドは、変更をサーバーに保存 します。ここではコンソール メッセージをログする以外は何もしません。</li>
 </ul>
 
@@ -214,9 +226,9 @@ Polymer({
 
 うまく動かない場合は、`step-5` ディレクトリ内にある以下のファイルと自分のコードとを照らし合わせてみてください。
 
--   [`post-card.html`](https://github.com/robdodson/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/post-card.html)
--   [`post-list.html`](https://github.com/robdodson/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/post-list.html)
--   [`index.html`](https://github.com/robdodson/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/index.html)
+-   [`post-card.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/post-card.html)
+-   [`post-list.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/post-list.html)
+-   [`index.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/index.html)
 
 ### まとめ
 

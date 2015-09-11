@@ -41,7 +41,7 @@ Polymer は、Google マップ表示用に `<google-map>` 要素 ([github](https
 
 &rarr; `index.html` の編集を開始する
 
-&rarr; `index.html` の `<head`> にて、そこにあるすべてのインポートを**削除**し、**以下の行を追加**します。`webcomponents.js` のインポートの後ろに置いてください。
+&rarr; `index.html` の `<head`> にて、そこにあるすべてのインポートを**削除**し、**以下の行を追加**します。`webcomponents-lite.js` のインポートの後ろに置いてください。
 
     <link rel="import" href="bower_components/google-map/google-map.html">
 
@@ -54,7 +54,7 @@ Polymer は、Google マップ表示用に `<google-map>` 要素 ([github](https
       <meta name="mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-capable" content="yes">
 
-      <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+      <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
       
       <link rel="import" href="bower_components/google-map/google-map.html">
 

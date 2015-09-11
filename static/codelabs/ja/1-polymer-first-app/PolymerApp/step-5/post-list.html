@@ -1,8 +1,9 @@
 <link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../post-service/post-service.html">
 <link rel="import" href="post-card.html">
 
-<polymer-element name="post-list" attributes="show">
+<dom-module id="post-list" attributes="show">
   <template>
     <style>
     :host {
@@ -12,19 +13,23 @@
     post-card {
       margin-bottom: 30px;
     }
+    div {
+      @apply(--layout-vertical);
+      @apply(--layout-center);
+    }
     </style>
 
     <!-- add markup here -->
     <post-service id="service" posts="{{posts}}">
     </post-service>
-
-    <div layout vertical center>
-
-      <template repeat="{{post in posts}}">
+        
+    <div>
+    
+      <template is="dom-repeat" items="{{posts}}" as="post">
         <post-card
           favorite="{{post.favorite}}"
-          on-favorite-tap="{{handleFavorite}}"
-          hidden?="{{show == 'favorites' && !post.favorite}}">
+          on-favorite-tap="handleFavorite"
+          hidden$="{{isHidden(show, post)}}">
           <img src="{{post.avatar}}" width="70" height="70">
           <h2>{{post.username}}</h2>
           <p>{{post.text}}</p>
@@ -37,8 +42,19 @@
 
   <script>
   Polymer({
-    handleFavorite: function(event, detail, sender) {
-      var post = sender.templateInstance.model.post;
+    is: 'post-list',
+    // define the element's JavaScript prototype here
+    properties: {
+      show: {
+        type: String,
+        reflectToAttribute: true
+      }
+    },
+    isHidden: function(show, post) {
+      return show === 'favorites' && !post.favorite;
+    },
+    handleFavorite: function(event) {
+      var post = event.model.post;
       this.$.service.setFavorite(post.uid, post.favorite);
     }
   });

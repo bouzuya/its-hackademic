@@ -1,8 +1,9 @@
 <link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../post-service/post-service.html">
 <link rel="import" href="post-card.html">
 
-<polymer-element name="post-list" attributes="show">
+<dom-module id="post-list" attributes="show">
   <template>
     <style>
     :host {
@@ -20,7 +21,11 @@
 
   <script>
   Polymer({
+    is: 'post-list',
     // define the element's JavaScript prototype here
+    properties: {
+      show: String
+    }
   });
   </script>
 

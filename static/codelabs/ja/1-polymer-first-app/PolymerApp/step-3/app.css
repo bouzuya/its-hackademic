@@ -8,7 +8,7 @@ body {
 }
 
 /* Add your styles here! */
-core-toolbar {
+paper-toolbar {
   background: #03a9f4;
   color: white;
 }

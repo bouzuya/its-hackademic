@@ -1,9 +1,11 @@
 <link rel="import"
   href="../components/polymer/polymer.html">
 <link rel="import"
-  href="../components/core-icon-button/core-icon-button.html">
+  href="../components/paper-icon-button/paper-icon-button.html">
+<link rel="import"
+  href="../components/iron-flex-layout/iron-flex-layout.html">
 
-<polymer-element name="post-card">
+<dom-module id="post-card">
   <template>
     <style>
     :host {
@@ -17,6 +19,8 @@
     }
     .card-header {
       margin-bottom: 10px;
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
     }
     /* Add your styles here: */
     .card-header ::content h2 {
@@ -32,7 +36,8 @@
 
     </style>
 
-    <div class="card-header" layout horizontal center>
+    <!-- CARD CONTENTS GO HERE -->
+    <div class="card-header">
       <content select="img"></content>
       <content select="h2"></content>
     </div>
@@ -41,7 +46,8 @@
   </template>
   <script>
   Polymer({
+    is: 'post-card'
     // define the element's JavaScript prototype here
   });
   </script>
-</polymer-element>
+</dom-module>

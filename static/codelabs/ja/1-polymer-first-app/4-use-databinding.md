@@ -38,29 +38,35 @@
 <link rel="import" href="../post-service/post-service.html">
 <link rel="import" href="post-card.html">
 
-<polymer-element name="post-list" attributes="show">
+<dom-module id="post-list" attributes="show">
   <template>
     <style>
-    :host {
-      display: block;
-      width: 100%;
-    }
-    post-card {
-      margin-bottom: 30px;
-    }
+    /* ... */
     </style>
     
     <!-- マークアップをここに追加 -->
-...
+  </template>
+
+  <script>
+  Polymer({
+    is: 'post-list',
+    // define the element's JavaScript prototype here
+    properties: {
+      show: String
+    }
+  });
+  </script>
+
+</polymer-element>
 ```
 
 <ul class="side-by-side">
   <li>ファイルには <code>&lt;post-service&gt;</code> 要素用のインポートがすでに含まれていますので、すぐに使用できる状態です。</li>
-  <li><code>attributes="show"</code> 属性は、<code>show</code> という名前の<a href="//polymer-project.org/docs/polymer/polymer.html#published-properties"> <em>published property（公開プロパティ）</em></a>を作成します。
+  <li>スクリプトの <code>properties</code> は、公開プロパティを設定します。ここでは、<code>show</code> という名前の<a href="//polymer-project.org/docs/polymer/polymer.html#published-properties"> <em>published property（公開プロパティ）</em></a>を作成します。
   </li>
 </ul>
 
-<a href="//polymer-project.org/docs/polymer/polymer.html#published-properties"> <em>公開プロパティ</em></a> は、属性を使用してマークアップで設定することもできれば、双方向のデータ バインディングを使用して別のプロパティに接続することもできます。この `show` プロパティは後のステップで使用します。
+<a href="https://www.polymer-project.org/1.0/docs/devguide/properties.html"> <em>公開プロパティ</em></a> は、属性を使用してマークアップで設定することもできれば、双方向のデータ バインディングを使用して別のプロパティに接続することもできます。この `show` プロパティは後のステップで使用します。
 
 <hr>
 
@@ -91,7 +97,7 @@
   </li>
 </ul>
 
-[_データ バインディング_](//polymer-project.org/docs/polymer/databinding.html) は、サービス要素の `posts` プロパティをローカル プロパティ（これもここでは `posts` と呼ばれる）にリンクさせます。カスタム要素に定義するメソッドはいずれも `this.posts` として、そのレスポンスにアクセスできます。
+[_データ バインディング_](https://www.polymer-project.org/1.0/docs/devguide/data-binding.html) は、サービス要素の `posts` プロパティをローカル プロパティ（これもここでは `posts` と呼ばれる）にリンクさせます。カスタム要素に定義するメソッドはいずれも `this.posts` として、そのレスポンスにアクセスできます。
 
 <hr>
 
@@ -100,20 +106,30 @@
 &rarr; 以下の `<div>` と `<template>` タグを追加します。
 
 ```side-by-side
+post-card {
+  margin-bottom: 30px;
+}
+/* 以下のスタイルを追加 */
+div {
+  @apply(--layout-vertical);
+  @apply(--layout-center);
+}
+</style>
+
 <post-service id="service" posts="{{posts}}">
 </post-service>
 
 <!-- 以下のコードを追加: -->
-<div layout vertical center>
+<div>
 
-  <template repeat="{{post in posts}}">
+  <template is="dom-repeat" items="{{posts}}" as="post">
     <post-card>
       <img src="{{post.avatar}}" width="70" height="70">
       <h2>{{post.username}}</h2>
       <p>{{post.text}}</p>
     </post-card>
   </template>
-  
+
 </div>
 ```
 
@@ -140,8 +156,9 @@
 &rarr; `index.html` を開き、`post-list.html` のインポート リンクを追加します。以下のように、`post-card` の既存のリンクを置き換えることができます。
 
 ```
-<link rel="import" href="../components/paper-tabs/paper-tabs.html">
-<!-- 以下のインポートを追加 -->
+<link rel="import"
+  href="../components/iron-flex-layout/classes/iron-flex-layout.html">
+<!-- post-card.html を post-list.html で置き換える -->
 <link rel="import" href="post-list.html">
 ```
 
@@ -151,7 +168,7 @@
 
 &rarr; 前のステップで追加した `<post-card>` 要素を探し、これを `<post-list>` で置き換えます。
 
-    <div class="container" layout vertical center>
+    <div class="container layout vertical center">
       <!-- post-card を post-list で置き換える -->
       <post-list show="messages"></post-list>
     </div>
@@ -167,13 +184,13 @@
 
 何か問題がある場合は、`step-4` フォルダー内にある以下のファイルと自分のコードとを照らし合わせてみてください。
 
--   [`post-list.html`](https://github.com/robdodson/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-4/post-list.html)
--   [`index.html`](https://github.com/robdodson/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-4/index.html)
+-   [`post-list.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-4/post-list.html)
+-   [`index.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-4/index.html)
 
 <aside class="callout">
   <b>さらに試してみる:</b>
 
-  <p>`post-service.html` を開いて、コンポーネントがどのように動くか確認してください。内部的には、<code> <a href="//polymer-project.org/docs/elements/core-elements.html#core-ajax">&lt;core-ajax&gt;</a></code> 要素を使って HTTP リクエストを行っています。</p>
+  <p>`post-service.html` を開いて、コンポーネントがどのように動くか確認してください。内部的には、<code> <a href="https://elements.polymer-project.org/elements/iron-ajax">&lt;iron-ajax&gt;</a></code> 要素を使って HTTP リクエストを行っています。</p>
 </aside>
 
 ### まとめ

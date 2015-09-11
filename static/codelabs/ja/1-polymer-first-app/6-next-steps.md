@@ -11,7 +11,7 @@
 #### Polymer
 
 - [polymer-project.org](http://www.polymer-project.org)
-- [コア要素](http://www.polymer-project.org/components/core-docs/index.html) ドキュメント
+- [Polymer Catalog](https://elements.polymer-project.org/)
 - Stack Overflow の [Polymerタグ](http://stackoverflow.com/questions/tagged/polymer)
 
 #### その他

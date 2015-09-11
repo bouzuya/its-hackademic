@@ -1,42 +1,50 @@
 <!doctype html>
 <html>
-
 <head>
-
   <title>unquote</title>
 
-  <meta name="viewport"
-  content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <link rel="stylesheet" href="app.css">
 
-  <script src="../components/webcomponentsjs/webcomponents.js">
+  <script src="../components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script>
+    // window.Polymer = window.Polymer || {};
+    // window.Polymer.dom = 'shadow';
   </script>
 
   <link rel="import"
     href="../components/font-roboto/roboto.html">
+
   <link rel="import"
-    href="../components/core-header-panel/core-header-panel.html">
+    href="../components/paper-header-panel/paper-header-panel.html">
   <link rel="import"
-    href="../components/core-toolbar/core-toolbar.html">
+    href="../components/paper-toolbar/paper-toolbar.html">
   <link rel="import"
     href="../components/paper-tabs/paper-tabs.html">
-
+  <link rel="import"
+    href="../components/iron-flex-layout/classes/iron-flex-layout.html">
+  
+  <style is="custom-style">
+    paper-toolbar {
+      --paper-toolbar-background: #03a9f4;
+    }
+  </style>
 </head>
 
-<body unresolved fullbleed layout vertical>
-  <core-header-panel flex>
-
-    <core-toolbar>
-      <paper-tabs class="fit" selected="messages" flex>
+<body class="fullbleed layout vertical">
+  
+  <paper-header-panel class="flex">
+  
+    <paper-toolbar>
+      <paper-tabs selected="0" class="flex fit">
         <paper-tab name="messages">Messages</paper-tab>
         <paper-tab name="favorites">Favorites</paper-tab>
       </paper-tabs>
-    </core-toolbar>
-
+    </paper-toolbar>
+  
     <!-- main page content will go here -->
-
-  </core-header-panel>
+  
+  </paper-header-panel>
 
   <script src="app.js"></script>
 </body>

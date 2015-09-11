@@ -48,11 +48,11 @@ Polymer は、Google Map表示用に`<google-map>`要素([github](https://github
 &rarr; `index.html` の `<head>` に、`google-map.html` をロードする [HTML Import](http://www.polymer-project.org/platform/html-imports.html) を追加します。
 
 
-**重要**: ポリフィルが正しくインポートをロードできるよう、すべてのインポートは `webcomponents.js` の後に置きます。
+**重要**: ポリフィルが正しくインポートをロードできるよう、すべてのインポートは `webcomponents-lite.js` の後に置きます。
 
     <head>
       ...
-      <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+      <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
       <link rel="import" href="bower_components/google-map/google-map.html">
     </head>
 

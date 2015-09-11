@@ -70,9 +70,9 @@
 
 &rarr; `index.html` の編集を始めます。
 
-&rarr; `index.html` の `<head`> にて、そこにあるすべてのインポートを**削除**し、**以下の行を追加**します。`webcomponents.js` のスクリプトの後ろに置くようにしてください。
+&rarr; `index.html` の `<head`> にて、そこにあるすべてのインポートを**削除**し、**以下の行を追加**します。`webcomponents-lite.js` のスクリプトの後ろに置くようにしてください。
 
-    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   
     <link rel="import" href="drive-app.html">
 
@@ -85,7 +85,7 @@
       <meta name="mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-capable" content="yes">
 
-      <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+      <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
       
       <link rel="import" href="drive-app.html">
     </head>

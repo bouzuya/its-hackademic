@@ -23,7 +23,7 @@
   <b>さらに学ぶ:</b>
 
   <p>Shadow DOM は、DOM 要素内にローカルな DOM ツリーを追加する方法を提供するもので、DOM ツリーには、ウェブページの残りの部分から切り離されたローカルなスタイルとマークアップとを持たせることができます。</p>
-  <p>Shadow DOM について詳しくは、<a href="//polymer-project.org/platform/shadow-dom.html"> Shadow DOM ポリフィルに関するドキュメント</a>を参照してください。</p>
+  <p>Shadow DOM について詳しくは、<a href="https://www.polymer-project.org/0.5/platform/shadow-dom.html"> Shadow DOM ポリフィルに関するドキュメント</a>を参照してください。</p>
 </aside>
 
 ### `<post-card>` 要素を作成する
@@ -45,7 +45,7 @@
 <link rel="import" 
   href="../components/polymer/polymer.html">
 <link rel="import" 
-  href="../components/core-icon-button/core-icon-button.html">
+  href="../components/paper-icon-button/paper-icon-button.html">
 ...
 ```
 
@@ -56,7 +56,7 @@
 次は、要素そのものの定義です。
 
 ```side-by-side
-<polymer-element name="post-card">
+<dom-module id="post-card">
   <template>
     <style>
     :host {
@@ -79,7 +79,7 @@
 ```
 
 <ul class="side-by-side">
-  <li><code>&lt;polymer-element&gt;</code> 要素は、Polymer において新しいカスタム要素をどのように定義するかを示します。ここでは、「post-card」という要素を作成します。</li>
+  <li><code>&lt;dom-module&gt;</code> 要素は、Polymer において新しいカスタム要素をどのように定義するかを示します。ここでは、「post-card」という要素を作成します。</li>
 <li><code>&lt;template&gt;</code> は要素の内部の DOM 構造、つまり <em>shadow DOM</em> を定義します。ここに、カスタム要素のマークアップを追加します。</li>
 <li><code>:host</code> 擬似クラスは、shadow DOM ツリー内部で使用され、そのツリーを<em>ホスト</em>する要素にマッチ します。 ここでは、 <code>&lt;post-card&gt;</code> 要素にマッチします。</li>
 <li>shadow DOM 内部で使用される通常のセレクターは、shadow DOM へ <em>スコープ</em>されます。 ここでは、<code>.card-header</code> は、この要素のshadow DOM にある要素にしかマッチしません。</li>
@@ -88,7 +88,7 @@
 <aside class="callout">
   <b>注:</b>
 
-  <p>`<polymer-element>` タグには、_直下の_子孫として `<template>` タグを 1つしか入れることができません。このタグはその要素のshadow DOM を定義します。それ以外の `<template>` タグは、外のテンプレート タグの中にネストしても構いません。</p>
+  <p>`<dom-module>` タグには、_直下の_子孫として `<template>` タグを 1つしか入れることができません。このタグはその要素のshadow DOM を定義します。それ以外の `<template>` タグは、外のテンプレート タグの中にネストしても構いません。</p>
 </aside>
 
 要素の定義の最後にあるのが `<script>` タグです。
@@ -96,10 +96,11 @@
 ```side-by-side
   <script>
   Polymer({
+    is: 'post-card'
     // 要素のプロパティとメソッドがここに入る
   });
   </script>
-</polymer-element>
+</dom-module>
 ```
 
 <ul class="side-by-side">
@@ -143,7 +144,7 @@
 
 ```side-by-side
 <!-- 以下のコードを追加: -->
-<div class="card-header" layout horizontal center>
+<div class="card-header">
   <content select="img"></content>
   <content select="h2"></content>
 </div>
@@ -151,7 +152,7 @@
 ```
 
 <ul class="side-by-side">
-  <li>`layout horizontal center` は、フレックスボックス レイアウトを作成し、子は横方向に整列され、縦にセンタリングされた状態となります。</li>
+  <!-- <li>`layout horizontal center` は、フレックスボックス レイアウトを作成し、子は横方向に整列され、縦にセンタリングされた状態となります。</li> -->
   <li>3 つの <code>&lt;content&gt;</code> 要素は、<em>挿入ポイント</em>を作成します。 <br />
 （shadow DOM 仕様では、ノードを選択するこのプロセスを<em>distribution（分散）</em>と呼びます。）</li>
   <li>子である<code>&lt;img&gt;</code> はすべて、最初の <code>&lt;content&gt;</code> タグにマッチし、ここに挿入されます。</li>
@@ -203,6 +204,34 @@
   <p>挿入ポイント自体のスタイル設定はできませんので、擬似要素<code>::content</code> は常に子孫セレクターと共に使用します。</p>
 </aside>
 
+さらに、flexbox を使ったレイアウトを指定しましょう。レイアウトにはメインページと同じように `iron-flex-layout` を使用します。`post-card.html`の先頭のインポートに以下のインポートを追加します。
+
+```
+<link rel="import"
+  href="../components/iron-flex-layout/iron-flex-layout.html">
+```
+
+カスタム要素内で  `iron-flex-layout` を使用するには、`@apply` を使って指定します。以下のスタイルは、`class` 属性で `layout horizontal center` を指定したものと同じ結果になります。
+
+```side-by-side
+.card-header {
+  margin-bottom: 10px;
+  /* ここにレイアウトのスタイルを追加 */
+  @apply(--layout-horizontal);
+  @apply(--layout-center);
+}
+```
+
+<ul class="side-by-side">
+  <li>`layout horizontal center` は、フレックスボックス レイアウトを作成し、子は横方向に整列され、縦にセンタリングされた状態となります。</li>
+</ul>
+
+<aside class="callout">
+  <b>注:</b>
+
+  <p>メインページで指定した `iron-flex-layout/classes/iron-flex-layout.html` とインポートしているものが違うことに注意してください。 `classes` 以下のファイルは、メインページなどで class 属性に指定する場合に使用します。`iron-flex-layout` については <a href="https://elements.polymer-project.org/guides/flex-layout" target="_blank">Flexbox layout with iron-flex-layout</a> を参照してください。</p>
+</aside>
+
 ### `<post-card>` をアプリにインポートする
 
 <div class="stepbystep">
@@ -214,7 +243,7 @@
 
 ```side-by-side
 <link rel="import"
-  href="../components/paper-tabs/paper-tabs.html">
+  href="../components/iron-flex-layout/classes/iron-flex-layout.html">
 <!-- 以下のインポートを追加: -->
 <link rel="import" href="post-card.html">
 ```
@@ -225,11 +254,11 @@
 
 <hr>
 
-&rarr; `<post-card>` 要素を、`index.html` の `<core-toolbar>` 要素のすぐ後ろに追加します。
+&rarr; `<post-card>` 要素を、`index.html` の `<paper-toolbar>` 要素のすぐ後ろに追加します。
 
 ```side-by-side
 <!-- 以下のコードを追加: -->
-<div class="container" layout vertical center>
+<div class="container layout vertical center">
 
   <post-card>
     <img width="70" height="70" 
@@ -257,8 +286,8 @@
 
 うまくいかない場合は、`step-3` フォルダー内にある以下のファイルと自分のコードとを照らし合わせてみてください。
 
--   [`post-card.html`](https://github.com/robdodson/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-3/post-card.html)
--   [`index.html`](https://github.com/robdodson/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-3/index.html)
+-   [`post-card.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-3/post-card.html)
+-   [`index.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-3/index.html)
 
 <aside class="callout">
   <b>さらに試してみる:</b>

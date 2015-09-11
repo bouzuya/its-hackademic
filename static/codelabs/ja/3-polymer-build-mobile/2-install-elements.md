@@ -102,7 +102,7 @@ Roboto2 フォントのインポートは必須ではありませんが、これ
 
 &rarr; `index.html` にて、`<head>` の中身を削除し、`codelab-app.html` をロードする [HTML Import](http://www.polymer-project.org/platform/html-imports.html) を追加します。`<head>` は以下のようになります。
 
-**重要**: HTML Import が `webcomponents.js` の後にくるようにしてください。
+**重要**: HTML Import が `webcomponents-lite.js` の後にくるようにしてください。
 
     <head>
       <title>PolymerMobileCodelab</title>
@@ -111,7 +111,7 @@ Roboto2 フォントのインポートは必須ではありませんが、これ
       <meta name="mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-capable" content="yes">
 
-      <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+      <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
       <link rel="import" href="codelab-app.html">
     </head>
