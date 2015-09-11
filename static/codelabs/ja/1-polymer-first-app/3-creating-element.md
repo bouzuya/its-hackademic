@@ -286,8 +286,8 @@
 
 うまくいかない場合は、`step-3` フォルダー内にある以下のファイルと自分のコードとを照らし合わせてみてください。
 
--   [`post-card.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-3/post-card.html)
--   [`index.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-3/index.html)
+-   [`post-card.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/ja/1-polymer-first-app/PolymerApp/step-3/post-card.html)
+-   [`index.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/ja/1-polymer-first-app/PolymerApp/step-3/index.html)
 
 <aside class="callout">
   <b>さらに試してみる:</b>

@@ -226,9 +226,9 @@ paper-icon-button {
 
 うまく動かない場合は、`step-5` ディレクトリ内にある以下のファイルと自分のコードとを照らし合わせてみてください。
 
--   [`post-card.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/post-card.html)
--   [`post-list.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/post-list.html)
--   [`index.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/1-polymer-first-app/PolymerApp/step-5/index.html)
+-   [`post-card.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/ja/1-polymer-first-app/PolymerApp/step-5/post-card.html)
+-   [`post-list.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/ja/1-polymer-first-app/PolymerApp/step-5/post-list.html)
+-   [`index.html`](https://github.com/pikotea/its-hackademic/blob/master/static/codelabs/ja/1-polymer-first-app/PolymerApp/step-5/index.html)
 
 ### まとめ
 
