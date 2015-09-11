@@ -105,6 +105,11 @@ Polymer の `<paper-*>` セットは、要素におもしろい効果を与え�
   <figcaption>デスクトップ モードでは縦が長く、モバイルでは縮小するツールバー</figcaption>
 </figure>
 
+うまくいかない場合は、以下のフォルダにあるファイルと自分のコードとを照らし合わせてみてください。
+
+-   [`Github`](https://github.com/pikotea/its-hackademic/tree/master/static/codelabs/ja/3-polymer-build-mobile/PolymerMobileCodelab/step-8)
+
+
 ### まとめ
 
 このステップで学んだ内容:

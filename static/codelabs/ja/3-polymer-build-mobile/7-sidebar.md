@@ -225,6 +225,10 @@ ID を **toast** に、クラスを **capsule** にします。その `text` 属
   <figcaption>通知がポップアップする</figcaption>
 </figure>
 
+うまくいかない場合は、以下のフォルダにあるファイルと自分のコードとを照らし合わせてみてください。
+
+-   [`Github`](https://github.com/pikotea/its-hackademic/tree/master/static/codelabs/ja/3-polymer-build-mobile/PolymerMobileCodelab/step-7)
+
 ### まとめ
 
 このステップで学んだ内容:

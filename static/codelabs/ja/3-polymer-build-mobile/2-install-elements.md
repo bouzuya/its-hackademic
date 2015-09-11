@@ -132,6 +132,10 @@ Roboto2 フォントのインポートは必須ではありませんが、これ
 
 &rarr; Chrome Dev Editor にて **index.html** ファイルを選択し、<img src="img/runbutton.png" class="icon"> ボタンをクリックします。すると、`codelab-app` の **Hello Polymer** がページ上に表示されます。
 
+うまくいかない場合は、以下のフォルダにあるファイルと自分のコードとを照らし合わせてみてください。
+
+-   [`Github`](https://github.com/pikotea/its-hackademic/tree/master/static/codelabs/ja/3-polymer-build-mobile/PolymerMobileCodelab/step-2)
+
 ### まとめ
 
 このステップで学んだ内容:

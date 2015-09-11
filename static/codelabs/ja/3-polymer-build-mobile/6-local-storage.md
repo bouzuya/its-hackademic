@@ -72,6 +72,10 @@
   <figcaption>`<iron-localstorage>` でメモを保存</figcaption>
 </figure>
 
+うまくいかない場合は、以下のフォルダにあるファイルと自分のコードとを照らし合わせてみてください。
+
+-   [`Github`](https://github.com/pikotea/its-hackademic/tree/master/static/codelabs/ja/3-polymer-build-mobile/PolymerMobileCodelab/step-6)
+
 ### まとめ
 
 このステップで学んだ内容:

@@ -184,6 +184,10 @@
   <figcaption>アプリに一覧表示されたメモ</figcaption>
 </figure>
 
+うまくいかない場合は、以下のフォルダにあるファイルと自分のコードとを照らし合わせてみてください。
+
+-   [`Github`](https://github.com/pikotea/its-hackademic/tree/master/static/codelabs/ja/3-polymer-build-mobile/PolymerMobileCodelab/step-5)
+
 ### まとめ
 
 このステップで学んだ内容:

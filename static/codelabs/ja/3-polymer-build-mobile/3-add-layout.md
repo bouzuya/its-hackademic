@@ -144,6 +144,9 @@ Polymer アイコンをツールバーに追加する方法:
 
 &rarr; ページを再読み込みします。ドロワーはデフォルトで非表示になっているはずです。
 
+うまくいかない場合は、以下のフォルダにあるファイルと自分のコードとを照らし合わせてみてください。
+
+-   [`Github`](https://github.com/pikotea/its-hackademic/tree/master/static/codelabs/ja/3-polymer-build-mobile/PolymerMobileCodelab/step-3)
 
 ### まとめ
 
