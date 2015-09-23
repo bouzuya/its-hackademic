@@ -148,7 +148,7 @@ paper-icon-button {
   <post-card
     favorite="{{post.favorite}}"
     on-favorite-tap="handleFavorite"
-    hidden$="{{isHidden(show, post)}}">
+    hidden$="{{isHidden(show, post.favorite)}}">
   <!-- ここまで -->
     <img src="{{post.avatar}}" width="70" height="70">
     <h2>{{post.username}}</h2>
@@ -192,8 +192,8 @@ paper-icon-button {
         reflectToAttribute: true
       }
     },
-    isHidden: function(show, post) {
-      return show === 'favorites' && !post.favorite;
+    isHidden: function(show, favorite) {
+      return show === 'favorites' && !favorite;
     },
     handleFavorite: function(event) {
       var post = event.model.post;
